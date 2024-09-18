@@ -83,7 +83,7 @@ class GeneralSupportModal(discord.ui.Modal):
         creation_date = datetime.now()
 
         # Datenbankverbindung herstellen
-        conn = sqlite3.connect('database.db')
+        conn = sqlite3.connect('Database.db')
         cur = conn.cursor()
 
         # Ticket in die Datenbank einfügen
