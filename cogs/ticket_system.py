@@ -389,6 +389,7 @@ class TicketOptions(discord.ui.View):
 
     @discord.ui.button(label="Ticket löschen 🎫", style = discord.ButtonStyle.red, custom_id="delete")
     async def delete_button(self, button: discord.ui.Button, interaction: discord.Interaction):
+        await interaction.response.defer()
         guild = self.bot.get_guild(GUILD_ID)
         channel = self.bot.get_channel(LOG_CHANNEL)
         ticket_id = interaction.channel.id
@@ -422,7 +423,7 @@ class TicketOptions(discord.ui.View):
         transcript_info.add_field(name="Ticket erstellt", value=f"<t:{ticket_created_unix}:f>", inline=True)
         transcript_info.add_field(name="Ticket geschlossen", value=f"<t:{ticket_closed_unix}:f>", inline=True)
 
-        await interaction.response.send_message(embed=embed)
+        await interaction.followup.send(embed=embed)
         try:
             await ticket_creator.send(embed=transcript_info, file=transcript_file)
         except:
